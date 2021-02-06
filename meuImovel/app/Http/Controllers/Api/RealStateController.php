@@ -30,7 +30,7 @@ class RealStateController extends Controller
             $realState = $this->realState->create($data);
             return response()->json([
                 'data' => [
-                    'msg' => 'Imovel cadastrado com sucesso.'
+                    'msg' => 'Imóvel cadastrado com sucesso.'
                 ]
             ], 200);
         } catch (\Exception $e) {
