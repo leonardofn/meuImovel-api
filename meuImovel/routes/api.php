@@ -22,7 +22,7 @@ Route::prefix('v1')->group(function(){
 
     Route::prefix('real-states')->name('real_states.')->group(function(){
 
-        Route::get('/', 'App\Http\Controllers\Api\RealStateController@index')->name('index');
+        Route::resource('/', 'App\Http\Controllers\Api\RealStateController');
 
     });
 });
