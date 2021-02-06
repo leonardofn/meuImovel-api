@@ -15,12 +15,16 @@ class CreateTableUserProfile extends Migration
     {
         Schema::create('user_profile', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+
             $table->text('abount')->nullable(true);
             $table->text('social_networks')->nullable(true);
             $table->string('phone');
             $table->string('mobile_phone');
 
             $table->timestamps();
+
+            $table->fereign('user_id')->references('id')->on('user_id');
         });
     }
 
