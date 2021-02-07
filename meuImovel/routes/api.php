@@ -20,9 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function(){
 
-    Route::prefix('real-states')->name('real_states.')->group(function(){
+    Route::name('real_states.')->group(function(){
 
-        Route::resource('/', 'App\Http\Controllers\Api\RealStateController');
+        Route::resource('real-states', 'App\Http\Controllers\Api\RealStateController');
 
     });
 });
