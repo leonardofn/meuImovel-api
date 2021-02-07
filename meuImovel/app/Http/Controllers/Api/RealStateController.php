@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Api\ApiMessages;
 use App\Models\RealState;
+use App\Http\Requests\RealStateRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class RealStateController extends Controller
 {
@@ -32,12 +33,13 @@ class RealStateController extends Controller
                 'data' => $realState
             ], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 401);
+            $message = new ApiMessages($e->getMessage());
+            return response()->json($message->getMessage(), 401);
         }
     }
 
 
-    public function store(Request $request)
+    public function store(RealStateRequest $request)
     {
         $data = $request->all();
 
@@ -50,11 +52,12 @@ class RealStateController extends Controller
                 ]
             ], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 401);
+            $message = new ApiMessages($e->getMessage());
+            return response()->json($message->getMessage(), 401);
         }
     }
 
-    public function update($id, Request $request)
+    public function update($id, RealStateRequest $request)
     {
         $data = $request->all();
 
@@ -69,7 +72,8 @@ class RealStateController extends Controller
                 ]
             ], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 401);
+            $message = new ApiMessages($e->getMessage());
+            return response()->json($message->getMessage(), 401);
         }
     }
 
@@ -86,7 +90,8 @@ class RealStateController extends Controller
                 ]
             ], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 401);
+            $message = new ApiMessages($e->getMessage());
+            return response()->json($message->getMessage(), 401);
         }
     }
 }
