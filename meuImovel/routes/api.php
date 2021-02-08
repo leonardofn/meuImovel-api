@@ -25,4 +25,11 @@ Route::prefix('v1')->group(function(){
         Route::resource('real-states', 'App\Http\Controllers\Api\RealStateController');
 
     });
+
+    Route::name('users.')->group(function(){
+
+        Route::resource('users', 'App\Http\Controllers\Api\UserController');
+
+    });
+
 });
