@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-//use App\Http\Requests\UserRequest;
 use App\Api\ApiMessages;
 use App\Models\User;
+use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -34,7 +33,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $data = $request->all();
 
@@ -90,7 +89,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
+    public function update($id, UserRequest $request)
     {
         $data = $request->all();
 

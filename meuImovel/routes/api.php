@@ -32,4 +32,10 @@ Route::prefix('v1')->group(function(){
 
     });
 
+    Route::name('categories.')->group(function(){
+
+        Route::resource('categories', 'App\Http\Controllers\Api\CategoryController');
+
+    });
+
 });
