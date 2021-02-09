@@ -46,6 +46,11 @@ class RealStateController extends Controller
         try {
 
             $realState = $this->realState->create($data);
+
+            if (isset($data['categories']) && count($data['categories'])) {
+                $realState->categories()->sync($data['categories']);
+            }
+
             return response()->json([
                 'data' => [
                     'msg' => 'Imóvel cadastrado com sucesso.'
@@ -65,6 +70,10 @@ class RealStateController extends Controller
 
             $realState = $this->realState->findOrFail($id);
             $realState->update($data);
+
+            if (isset($data['categories']) && count($data['categories'])) {
+                $realState->categories()->sync($data['categories']);
+            }
 
             return response()->json([
                 'data' => [
