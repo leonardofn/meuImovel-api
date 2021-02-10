@@ -10,11 +10,11 @@ class UserProfile extends Model
     use HasFactory;
 
     protected $table = 'user_profile';
-    
+
     protected $fillable = [
         'phone',
         'mobile_phone',
-        'about',
+        'abount',
         'social_networks'
     ];
 
