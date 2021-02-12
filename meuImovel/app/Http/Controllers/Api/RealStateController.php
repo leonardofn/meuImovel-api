@@ -53,11 +53,16 @@ class RealStateController extends Controller
             }
 
             if ($images) {
+                $imagesUploaded = [];
+
                 foreach ($images as $image) {
                     $path = $image->store('images', 'public');
-                    dd($path);
+                    $imagesUploaded[] = ['photo' => $path, 'is_thumb' => false];
                 }
+                
+                $realState->photos()->createMany($imagesUploaded);
             }
+            //dd($imagesUploaded);
 
             return response()->json([
                 'data' => [

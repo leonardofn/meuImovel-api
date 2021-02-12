@@ -33,6 +33,6 @@ class RealState extends Model
 
     public function photos()
     {
-        return $tihs->hasMany(RealStatePhoto::class);
+        return $this->hasMany(RealStatePhoto::class);
     }
 }
