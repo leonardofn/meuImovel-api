@@ -62,7 +62,6 @@ class RealStateController extends Controller
                 
                 $realState->photos()->createMany($imagesUploaded);
             }
-            //dd($imagesUploaded);
 
             return response()->json([
                 'data' => [
