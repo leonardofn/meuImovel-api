@@ -25,29 +25,33 @@ Route::prefix('v1')->group(function(){
 
     Route::post('login', [LoginJwtController::class, 'login']);
 
-    Route::name('real_states.')->group(function(){
+    Route::group(['middleware' => ['jwt.auth']], function () {
+        
+        Route::name('real_states.')->group(function(){
 
-        Route::resource('real-states', 'App\Http\Controllers\Api\RealStateController');
-
-    });
-
-    Route::name('users.')->group(function(){
-
-        Route::resource('users', 'App\Http\Controllers\Api\UserController');
-
-    });
-
-    Route::name('categories.')->group(function(){
-
-        Route::get('categories/{id}/real-states', [CategoryController::class, 'realState']);
-        Route::resource('categories', 'App\Http\Controllers\Api\CategoryController');
-
-    });
-
-    Route::name('photos.')->prefix('photos')->group(function(){
-
-        Route::put('/set-thumb/{photoId}/{realStateId}', [RealStatePhotoController::class, 'setThumb']);
-        Route::delete('/{id}', [RealStatePhotoController::class, 'remove']);
+            Route::resource('real-states', 'App\Http\Controllers\Api\RealStateController');
+    
+        });
+    
+        Route::name('users.')->group(function(){
+    
+            Route::resource('users', 'App\Http\Controllers\Api\UserController');
+    
+        });
+    
+        Route::name('categories.')->group(function(){
+    
+            Route::get('categories/{id}/real-states', [CategoryController::class, 'realState']);
+            Route::resource('categories', 'App\Http\Controllers\Api\CategoryController');
+    
+        });
+    
+        Route::name('photos.')->prefix('photos')->group(function(){
+    
+            Route::put('/set-thumb/{photoId}/{realStateId}', [RealStatePhotoController::class, 'setThumb']);
+            Route::delete('/{id}', [RealStatePhotoController::class, 'remove']);
+    
+        });
 
     });
 
