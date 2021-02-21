@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\LoginJwtController;
 use App\Http\Controllers\Api\RealStatePhotoController;
 use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
@@ -21,6 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function(){
+
+    Route::post('login', [LoginJwtController::class, 'login']);
 
     Route::name('real_states.')->group(function(){
 
