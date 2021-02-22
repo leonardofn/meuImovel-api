@@ -24,6 +24,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function(){
 
     Route::post('login', [LoginJwtController::class, 'login']);
+    Route::get('logout', [LoginJwtController::class, 'logout']);
+    Route::get('refresh', [LoginJwtController::class, 'refresh']);
 
     Route::group(['middleware' => ['jwt.auth']], function () {
         
