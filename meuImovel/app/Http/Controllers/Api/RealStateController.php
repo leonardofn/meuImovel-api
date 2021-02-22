@@ -47,7 +47,8 @@ class RealStateController extends Controller
 
         try {
 
-            $realState = auth()->user()->realState()->create($data);
+            $data['user_id'] = auth()->user()->id;
+            $realState = $this->realState->create($data);
 
             if (isset($data['categories']) && count($data['categories'])) {
                 $realState->categories()->sync($data['categories']);
