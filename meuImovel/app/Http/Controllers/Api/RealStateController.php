@@ -6,6 +6,7 @@ use App\Api\ApiMessages;
 use App\Models\RealState;
 use App\Http\Requests\RealStateRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class RealStateController extends Controller
 {
@@ -18,16 +19,16 @@ class RealStateController extends Controller
 
     public function index()
     {
-        $realState = $this->realState->paginate('10');
+        $realStates = auth()->user()->realState();
 
-        return response()->json($realState, 200);
+        return response()->json($realStates->paginate(10), 200);
     }
 
     public function show($id)
     {
         try {
             
-            $realState = $this->realState->with('photos')->findOrFail($id);
+            $realState = auth()->user()->realState()->with('photos')->findOrFail($id);
 
             return response()->json([
                 'data' => $realState
@@ -46,7 +47,7 @@ class RealStateController extends Controller
 
         try {
 
-            $realState = $this->realState->create($data);
+            $realState = auth()->user()->realState()->create($data);
 
             if (isset($data['categories']) && count($data['categories'])) {
                 $realState->categories()->sync($data['categories']);
@@ -80,7 +81,7 @@ class RealStateController extends Controller
 
         try {
 
-            $realState = $this->realState->findOrFail($id);
+            $realState = auth()->user()->realState()->findOrFail($id);
             $realState->update($data);
 
             if (isset($data['categories']) && count($data['categories'])) {
