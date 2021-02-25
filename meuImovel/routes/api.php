@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\RealStateSearchController;
 use App\Http\Controllers\Api\Auth\LoginJwtController;
 use App\Http\Controllers\Api\RealStatePhotoController;
 use App\Http\Controllers\Api\CategoryController;
@@ -26,6 +27,8 @@ Route::prefix('v1')->group(function(){
     Route::post('login', [LoginJwtController::class, 'login']);
     Route::get('logout', [LoginJwtController::class, 'logout']);
     Route::get('refresh', [LoginJwtController::class, 'refresh']);
+
+    Route::get('/search', [RealStateSearchController::class, 'index']);
 
     Route::group(['middleware' => ['jwt.auth']], function () {
         
