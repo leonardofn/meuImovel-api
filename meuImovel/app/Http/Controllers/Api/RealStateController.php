@@ -6,7 +6,6 @@ use App\Api\ApiMessages;
 use App\Models\RealState;
 use App\Http\Requests\RealStateRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class RealStateController extends Controller
 {
@@ -59,7 +58,8 @@ class RealStateController extends Controller
 
                 foreach ($images as $image) {
                     $path = $image->store('images', 'public');
-                    $imagesUploaded[] = ['photo' => $path, 'is_thumb' => false];
+                    $url = asset('storage') . '/' . $path;
+                    $imagesUploaded[] = ['photo' => $url, 'is_thumb' => false];
                 }
                 
                 $realState->photos()->createMany($imagesUploaded);
