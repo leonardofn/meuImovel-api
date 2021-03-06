@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\RealStateSearchController;
 use App\Http\Controllers\Api\Auth\LoginJwtController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RealStatePhotoController;
 use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
@@ -24,6 +25,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function(){
 
+    Route::post('users', [UserController::class, 'register']);
+
     Route::post('login', [LoginJwtController::class, 'login']);
     Route::get('logout', [LoginJwtController::class, 'logout']);
     Route::get('refresh', [LoginJwtController::class, 'refresh']);
@@ -39,8 +42,12 @@ Route::prefix('v1')->group(function(){
         });
     
         Route::name('users.')->group(function(){
-    
-            Route::resource('users', 'App\Http\Controllers\Api\UserController');
+
+            Route::get('users', [UserController::class, 'index']);
+            Route::get('users/{id}', [UserController::class, 'show']);
+            Route::put('users/{id}', [UserController::class, 'update']);
+            Route::delete('users/{id}', [UserController::class, 'destroy']);
+            //Route::resource('users', 'App\Http\Controllers\Api\UserController');
     
         });
     
